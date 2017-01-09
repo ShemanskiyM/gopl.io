@@ -27,12 +27,14 @@ func main() {
 		}
 
 		b, err := io.Copy(os.Stdout, resp.Body)
+		status := resp.Status
 		resp.Body.Close()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "fetch: reading %s: %v\n", url, err)
 			os.Exit(1)
 		}
 		fmt.Printf("%d", b)
+		fmt.Println("\n" + status)
 	}
 }
 
